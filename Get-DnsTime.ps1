@@ -89,8 +89,8 @@ do {
         }
     }
 
-    # Output the test results if DNS time is greater than or equal to the polling rate
-    if ($DnsTime -ge $PollingRate) {
+    # Output the test results if DNS time is greater than or equal 500ms
+    if ($DnsTime -ge 500) {
         $Output
     }
 
