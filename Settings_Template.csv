@@ -1,0 +1,8 @@
+# Remove commented lines and add at least one record you want to test.
+
+NameServer,Record,Recordtype
+<DNS_SERVER>,<DNS_RECORD>,<DNS_RECORDTYPE>
+
+# Examples:
+# 1.1.1.1,www.microsoft.com,A
+# ns1.google.com,_dmarc.google.com,TXT
