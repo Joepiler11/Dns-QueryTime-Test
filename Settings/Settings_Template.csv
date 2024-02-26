@@ -1,4 +1,4 @@
-# Remove commented lines and add at least one record you want to test.
+# Remove commented lines and add at least one record you want to test and rename it to settings.csv
 
 NameServer,Record,Recordtype
 <DNS_SERVER>,<DNS_RECORD>,<DNS_RECORDTYPE>
