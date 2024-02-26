@@ -63,7 +63,7 @@ try {
     $TotalImportTime = 0
 
     foreach ($LogFile in $SelectedLogFiles) {  # Loop through selected log files
-        $ImportTime = (Measure-Command{  # Measure time to import each log file
+        $ImportTime = Measure-Command{  # Measure time to import each log file
             $Log = Import-Csv "$LogFile"  # Import log file as CSV
             $Log | ForEach-Object {  # Convert timestamp to DateTime object
                 $_.timestamp = [DateTime]::Parse($_.timestamp)
@@ -72,7 +72,8 @@ try {
                 $_.dnstime = [int]$_.dnstime
             }
             $CombinedLogs += $Log  # Combine logs
-        }).Seconds
+        }
+        $ImportTime = [math]::Round($ImportTime.Totalseconds)
         $FileNr ++
         Write-Host "---Finished importing '$LogFile' in $ImportTime seconds. ($FileNr/$FileCount)" -ForegroundColor Green  # Display import completion message
         $TotalImportTime += $ImportTime

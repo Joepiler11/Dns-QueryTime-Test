@@ -72,7 +72,7 @@ do {
 
     try {        
         # Measure the time taken to resolve the DNS query using the specified DNS server and record type
-        $DnsTime = (Measure-Command {Resolve-DnsName $($TestRecord.Record) -Type $($TestRecord.RecordType) -Server $($TestRecord.NameServer) -DnsOnly -ErrorAction Stop}).Milliseconds
+        $DnsTime = (Measure-Command {Resolve-DnsName $($TestRecord.Record) -Type $($TestRecord.RecordType) -Server $($TestRecord.NameServer) -DnsOnly -ErrorAction Stop})
     }
     catch {
         $ErrorInfo = $_.Exception.Message
@@ -84,13 +84,13 @@ do {
             Record = $TestRecord.Record
             Type = $TestRecord.RecordType
             NameServer = $TestRecord.NameServer
-            DnsTime = $DnsTime
+            DnsTime = [math]::Round($DnsTime.TotalMilliseconds)
             Error = $ErrorInfo
         }
     }
 
-    # Output the test results if DNS time is greater than or equal to the polling rate
-    if ($DnsTime -ge $PollingRate) {
+    # Output the test results if DNS time is greater than or equal 500
+    if ([math]::Round($DnsTime.TotalMilliseconds) -ge 500) {
         $Output
     }
 
